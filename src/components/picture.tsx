@@ -1,10 +1,8 @@
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import { Image as ImageType } from "velite";
 
 type PictureProps = {
   image: ImageType;
-  imageDark?: ImageType;
   quality?: number;
   width?: number;
   height?: number;
@@ -12,31 +10,21 @@ type PictureProps = {
   className?: string;
 };
 
-export default function Picture({ image, imageDark, quality, width, height, alt, className }: PictureProps) {
+export default function Picture({ image, quality, width, height, alt, className }: PictureProps) {
+  // Use provided dimensions or fall back to image dimensions
+  const imageWidth = width || image.width || 1024;
+  const imageHeight = height || image.height || 768;
+
   return (
-    <>
-      <Image
-        src={image.src}
-        alt={alt}
-        width={width || image.width}
-        height={height || image.height}
-        className={cn(imageDark && "block dark:hidden", className)}
-        priority
-        blurDataURL={image.blurDataURL}
-        placeholder="blur"
-        quality={quality || 100}
-      />
-      {imageDark && <Image
-        src={imageDark.src}
-        alt={alt}
-        width={width || imageDark.width}
-        height={height || imageDark.height}
-        className={cn("hidden dark:block", className)}
-        priority
-        blurDataURL={imageDark.blurDataURL}
-        placeholder="blur"
-        quality={quality || 100}
-      />}
-    </>
+    <Image
+      src={image.src}
+      alt={alt}
+      width={imageWidth}
+      height={imageHeight}
+      className={className}
+      priority
+      blurDataURL={image.blurDataURL}
+      quality={quality || 100}
+    />
   );
 }

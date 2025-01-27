@@ -14,12 +14,12 @@ type ProjectPageProps = {
   };
 };
 
-function getProjectFromParam(params: { slug: string }) {
-  const slug = params.slug;
+async function getProjectFromParam(params: { slug: string }) {
+  const slug = (await params).slug;
   const project = projects.find((project) => project.slugAsParams === slug);
 
   if (!project) {
-    null;
+    return null;
   }
   return project;
 }
@@ -27,13 +27,13 @@ function getProjectFromParam(params: { slug: string }) {
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
-  const project = getProjectFromParam(params);
+  const project = await getProjectFromParam(params);
 
   if (!project) {
     return {};
   }
-
-  const ogUrl = new URL(`${siteConfig.siteUrl}${project.image.src}`);
+  
+  const ogUrl = new URL(`${siteConfig.siteUrl}${project.image?.src}`);
   ogUrl.searchParams.set("heading", project.title);
   ogUrl.searchParams.set("type", "Blog Post");
   ogUrl.searchParams.set("mode", "dark");
@@ -68,13 +68,12 @@ export async function generateMetadata({
 export async function generateStaticParams(): Promise<
   ProjectPageProps["params"][]
 > {
-  return projects.map((project) => ({
-    slug: project.slugAsParams,
-  }));
+  const slugs = projects.map((project) => project.slugAsParams);
+  return slugs.map((slug) => ({ slug }));
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = getProjectFromParam(params);
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const project = await getProjectFromParam(params);
   
   if (!project) {
     notFound();
@@ -98,7 +97,6 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           </div>
           <Picture
             image={project.image}
-            imageDark={project.imageDark}
             width={600}
             height={400}
             alt={project.title}

@@ -1,14 +1,13 @@
-import { cn } from "@/lib/utils";
-import { CodeBlock } from "./codeblock";
-import Image, { type ImageProps } from "next/image";
-import { Button } from "@/components/ui/button";
-import { Callout, CalloutTitle, CalloutDescription } from "./callout";
+import { ComponentSource } from "@/components/mdx/component-source";
+import Picture from "@/components/picture";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -16,15 +15,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+} from "@/components/ui/card";
+import { File, Files, Folder } from "@/components/ui/files";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Files, File, Folder } from "@/components/ui/files";
-import { ComponentSource } from "@/components/mdx/component-source";
-import { ZoomableMedia } from "./zoomable-media";
+import { cn } from "@/lib/utils";
 import { CircleAlertIcon } from "lucide-react";
 import Link from "next/link";
+import { Callout, CalloutDescription, CalloutTitle } from "./callout";
 import { CodeBlockWrapper } from "./code-block-wrapper";
+import { CodeBlock } from "./codeblock";
+import { ZoomableMedia } from "./zoomable-media";
 
 export const mdxComponents = {
   Accordion,
@@ -143,8 +143,20 @@ export const mdxComponents = {
     alt,
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md border", className)} alt={alt} {...props} />
+    <div className="my-4">
+      <Picture
+        image={{
+          src: props.src || "",
+          width: 1024, // Default width
+          height: 768, // Default height
+          blurWidth: 8,
+          blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4dHRsdHR4dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/2wBDAR4WFiMeJR4lHR0lPTAdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=",
+          blurHeight: 6,
+        }}
+        alt={alt || ""}
+        className={cn("rounded-lg border", className)}
+      />
+    </div>
   ),
   hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
   table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
@@ -192,7 +204,29 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  Image: (props: ImageProps) => <Image {...props} alt="blog image" />,
+  Image: ({ src, alt, ...props }: unknown) => {
+    // Extract dimensions from the image path if available
+    const dimensions = {
+      width: props.width || 1024, // Default width
+      height: props.height || 768, // Default height
+    };
+
+    return (
+      <div className="my-4">
+        <Picture
+          image={{
+            src,
+            ...dimensions,
+            blurDataURL: props.blurDataURL,
+            blurWidth: dimensions.width,
+            blurHeight: dimensions.height
+          }}
+          alt={alt || ""}
+          className="rounded-lg border"
+        />
+      </div>
+    );
+  },
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
