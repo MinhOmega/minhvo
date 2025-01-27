@@ -173,7 +173,7 @@ export const mdxComponents = {
   th: ({
     className,
     ...props
-  }: React.HTMLAttributes<HTMLTableHeaderCellElement>) => (
+  }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <th
       className={cn(
         "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
@@ -185,7 +185,7 @@ export const mdxComponents = {
   td: ({
     className,
     ...props
-  }: React.HTMLAttributes<HTMLTableDataCellElement>) => (
+  }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <td
       className={cn(
         "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
@@ -204,22 +204,17 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  Image: ({ src, alt, ...props }: unknown) => {
-    // Extract dimensions from the image path if available
-    const dimensions = {
-      width: props.width || 1024, // Default width
-      height: props.height || 768, // Default height
-    };
-
+  Image: ({ src, alt }: { src?: string; alt?: string }) => {
     return (
       <div className="my-4">
         <Picture
           image={{
-            src,
-            ...dimensions,
-            blurDataURL: props.blurDataURL,
-            blurWidth: dimensions.width,
-            blurHeight: dimensions.height
+            src: src || "",
+            width: 1024,
+            height: 768,
+            blurWidth: 8,
+            blurDataURL: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4dHRsdHR4dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/2wBDAR4WFiMeJR4lHR0lPTAdHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=",
+            blurHeight: 6,
           }}
           alt={alt || ""}
           className="rounded-lg border"

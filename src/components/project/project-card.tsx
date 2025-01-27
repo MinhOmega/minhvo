@@ -57,15 +57,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       <div className="w-2/5 aspect-video overflow-hidden hover:border duration-100 transition-all transform-gpu ease-in-out rounded-xl hidden tablet:block">
         <Link href={`/projects/${project.slugAsParams}`}>
-          {/* <Picture
+          <Picture
             image={project.image}
-            imageDark={project.imageDark}
             width={250}
             height={100}
             quality={100}
             alt={project.title}
             className="w-full h-full object-cover scale-100 hover:scale-105 transition-all transform-gpu ease-in-out"
-          /> */}
+          />
         </Link>
       </div>
     </div>
