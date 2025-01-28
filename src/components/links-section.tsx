@@ -22,7 +22,7 @@ const LinksSection = ({ links }: { links: ProjectLink[] }) => {
       whileTap="expanded"
       transition={{
         staggerChildren: 0.07,
-        delayChildren: 0.2 // Add delay before expanding
+        delayChildren: 0.2
       }}
     >
       <motion.div 
@@ -32,27 +32,29 @@ const LinksSection = ({ links }: { links: ProjectLink[] }) => {
           expanded: {}
         }}
       >
-        <AnimatePresence mode="wait">
-          {visibleLinks.map((link, i) => (
-            <motion.a
-              key={i}
-              href={link.url}
-              target="_blank"
-              className="social-link"
-              initial={{ opacity: 1 }}
-              variants={{
-                collapsed: { opacity: 1 },
-                expanded: { opacity: 1 }
-              }}
-            >
-              {IconMap[link.name.toLowerCase() as keyof typeof IconMap]}
-              <span className="sr-only">
-                {`${link.name} - ${link.url}`}
-              </span>
-            </motion.a>
-          ))}
+        {visibleLinks.map((link, i) => (
+          <motion.a
+            key={i}
+            href={link.url}
+            target="_blank"
+            className="social-link"
+            initial={{ opacity: 1 }}
+            variants={{
+              collapsed: { opacity: 1 },
+              expanded: { opacity: 1 }
+            }}
+          >
+            {IconMap[link.name.toLowerCase() as keyof typeof IconMap]}
+            <span className="sr-only">
+              {`${link.name} - ${link.url}`}
+            </span>
+          </motion.a>
+        ))}
+
+        <AnimatePresence>
           {hasMoreLinks && (
             <motion.div 
+              key="more-count"
               className="relative"
               variants={{
                 collapsed: { 
@@ -61,7 +63,7 @@ const LinksSection = ({ links }: { links: ProjectLink[] }) => {
                   transition: {
                     duration: 0.3,
                     ease: "easeInOut",
-                    delay: 0.1 // Add delay before collapsing
+                    delay: 0.1
                   },
                   display: "block"
                 },
@@ -71,7 +73,7 @@ const LinksSection = ({ links }: { links: ProjectLink[] }) => {
                   transition: {
                     duration: 0.2,
                     ease: "easeOut",
-                    delay: 0.1 // Add delay before expanding
+                    delay: 0.1
                   },
                   display: "none"
                 }
@@ -93,6 +95,9 @@ const LinksSection = ({ links }: { links: ProjectLink[] }) => {
               </motion.span>
             </motion.div>
           )}
+        </AnimatePresence>
+
+        <AnimatePresence>
           {hiddenLinks.map((link, i) => (
             <motion.a
               key={i + 3}
@@ -106,7 +111,7 @@ const LinksSection = ({ links }: { links: ProjectLink[] }) => {
                   x: -20,
                   transition: {
                     duration: 0.2,
-                    delay: 0.1 // Add delay before collapsing
+                    delay: 0.1
                   }
                 },
                 expanded: { 
@@ -115,7 +120,7 @@ const LinksSection = ({ links }: { links: ProjectLink[] }) => {
                   x: 0,
                   transition: {
                     duration: 0.3,
-                    delay: 0.3 + (i * 0.05) // Increased delay and stagger
+                    delay: 0.3 + (i * 0.05)
                   }
                 }
               }}

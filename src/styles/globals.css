@@ -100,9 +100,9 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --nav-item-shadow: rgba(0, 0, 0, 0.15);
-    --nav-item-current: rgba(0, 0, 0, 0.08);
-    --nav-container-shadow: rgba(0, 0, 0, 0.02);
+    --nav-item-shadow: rgba(255, 255, 255, 0.1);
+    --nav-item-current: rgba(255, 255, 255, 0.05);
+    --nav-container-shadow: rgba(255, 255, 255, 0.02);
 
     --radius: 0.5rem;
   }

@@ -12,7 +12,7 @@ type ProjectCardProps = {
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <div className="flex p-3 justify-between gap-2 rounded-xl border overflow-hidden">
-      <div className="space-y-2 w-full tablet:w-3/5">
+      <div className="space-y-2 w-full md:w-3/5">
         <Link href={`/projects/${project.slugAsParams}`} className="space-y-2 group/link">
           <div className="inline-flex items-center gap-1">
             <div className="flex items-center gap-2 flex-wrap">
@@ -38,7 +38,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <LinksSection links={project.links} />
         </div>
       </div>
-      <div className="w-2/5 aspect-video overflow-hidden hover:border duration-100 transition-all transform-gpu ease-in-out rounded-xl hidden tablet:block">
+      <div className="hidden md:block w-2/5 aspect-video overflow-hidden hover:border duration-100 transition-all transform-gpu ease-in-out rounded-xl">
         <Link href={`/projects/${project.slugAsParams}`}>
           <Picture
             image={project.image}

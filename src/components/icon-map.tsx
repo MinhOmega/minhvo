@@ -9,6 +9,7 @@ import {
 } from "@radix-ui/react-icons";
 import { FacebookIcon, Mail, Phone } from "lucide-react";
 import AppStoreIcon from "./icons/appstore";
+import GooglePlayIcon from "./icons/google-play";
 
 export const IconMap = {
   github: <GitHubLogoIcon />,
@@ -22,4 +23,5 @@ export const IconMap = {
   phone: <Phone size={16} />,
   facebook: <FacebookIcon />,
   appstore: <AppStoreIcon />,
+  googleplay: <GooglePlayIcon />,
 };
