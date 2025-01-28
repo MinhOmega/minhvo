@@ -12,6 +12,10 @@ export const skillsConfig = [
     technologies: ["Tailwind CSS", "SCSS", "styled-components", "CSS", "Headless UI"],
   },
   {
+    category: "Database",
+    technologies: ["MySQL", "MongoDB"],
+  },
+  {
     category: "Tools",
     technologies: ["Git", "Jira", "Confluence", "Figma", "VS Code", "Android Studio"],
   },

@@ -1,12 +1,12 @@
 import { projects } from "#site/content";
+import LinksSection from "@/components/links-section";
 import { MDXContentRenderer } from "@/components/mdx/mdx-content-renderer";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import Picture from "@/components/picture";
-import { IconMap } from "@/components/icon-map";
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
 import { siteConfig } from "@/config/site.config";
+import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 type ProjectPageProps = {
   params: {
@@ -24,15 +24,13 @@ async function getProjectFromParam(params: { slug: string }) {
   return project;
 }
 
-export async function generateMetadata({
-  params,
-}: ProjectPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const project = await getProjectFromParam(params);
 
   if (!project) {
     return {};
   }
-  
+
   const ogUrl = new URL(`${siteConfig.siteUrl}${project.image?.src}`);
   ogUrl.searchParams.set("heading", project.title);
   ogUrl.searchParams.set("type", "Blog Post");
@@ -65,16 +63,14 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams(): Promise<
-  ProjectPageProps["params"][]
-> {
+export async function generateStaticParams(): Promise<ProjectPageProps["params"][]> {
   const slugs = projects.map((project) => project.slugAsParams);
   return slugs.map((slug) => ({ slug }));
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = await getProjectFromParam(params);
-  
+
   if (!project) {
     notFound();
   }
@@ -89,11 +85,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 size={18}
                 className="group-hover/back:-translate-x-1 transition-transform transform-gpu duration-100 ease-in-out"
               />
-              <span className="sr-only">dev.gxuri.in</span>
+              <span className="sr-only">minhvo.vercel.app</span>
             </Link>
-            <p className="px-2 py-1 text-xs rounded bg-secondary">
-              {new Date(project.date).toDateString()}
-            </p>
+            <p className="px-2 py-1 text-xs rounded bg-secondary">{new Date(project.date).toDateString()}</p>
           </div>
           <Picture
             image={project.image}
@@ -104,40 +98,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           />
           <h1 className="head-text-sm py-1 mt-6 mb-4">{project.title}</h1>
           <div className="mb-8">
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              {project.links.map((link, i) => (
-                <a
-                  key={i}
-                  href={link.url}
-                  target="_blank"
-                  className="social-link"
-                >
-                  {IconMap[link.name.toLowerCase() as keyof typeof IconMap]}
-                  <span className="sr-only">
-                    {`${link.name} - ${link.url}`}
-                  </span>
-                </a>
-              ))}
+            <div className="mb-4">
+              <LinksSection links={project.links} />
             </div>
             <div className="flex flex-wrap items-center gap-2">
               {project.tags.map((tag) => (
-                <p
-                  key={tag}
-                  className="text-xs p-1 rounded bg-secondary cursor-pointer"
-                >
+                <p key={tag} className="text-xs p-1 rounded bg-secondary cursor-pointer">
                   {tag}
                 </p>
               ))}
             </div>
           </div>
-          <p className="rounded mb-4">
-            {project.description}
-          </p>
+          <p className="rounded mb-4">{project.description}</p>
         </div>
-        <div
-          id="tab-section"
-          className="relative w-full lg:h-full lg:w-3/5 p-2 md:p-8 overflow-y-scroll"
-        >
+        <div id="tab-section" className="relative w-full lg:h-full lg:w-3/5 p-2 md:p-8 overflow-y-scroll">
           <MDXContentRenderer code={project.body} />
         </div>
       </div>

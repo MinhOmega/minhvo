@@ -31,6 +31,7 @@ const schema = z.object({
 });
 
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [githubProjects, setGithubProjects] = useState<any>([]);
   const [loading, setLoading] = useState(false);
 
@@ -232,6 +233,7 @@ export default function Home() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const GithubRepo = React.memo(({ repo }: { repo: any }) => (
   <a
     href={repo.html_url}
