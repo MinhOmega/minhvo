@@ -1,43 +1,55 @@
-# Next.js 15 MDX Template
+# Personal Portfolio & Blog
 
-A modern documentation and blog template built with Next.js 15, MDX, Velite, and Shadcn UI components. This template provides a robust foundation for creating beautiful documentation sites and blogs with a focus on developer experience and performance.
+A modern portfolio and blog built with Next.js 15, MDX, Velite, and Shadcn UI components. This site showcases my work experience, projects, and technical writings with a focus on performance and developer experience.
 
 ## Features
 
-- **Next.js 15** - Built on the latest version of React framework for production
-- **MDX Support** - Write content using Markdown with embedded React components
-- **Content Management** - Efficient content organization and processing with Velite
-- **Modern UI Components** - Pre-built components from Shadcn UI
-- **TypeScript** - Full type safety out of the box
-- **Tailwind CSS** - Utility-first CSS framework for styling
-- **Documentation Ready** - Pre-configured for technical documentation and blogs
+- **Next.js 15** - Latest React framework with App Router
+- **MDX Support** - Write content in Markdown with React components
+- **Content Management** - Organized content processing with Velite
+- **Modern UI Components** - Shadcn UI components with TailwindCSS
+- **TypeScript** - Full type safety throughout
+- **Dark Mode** - Elegant dark/light theme switching
+- **Responsive Design** - Mobile-first approach
+- **SEO Optimized** - Meta tags and structured data
+- **Performance Focus** - Optimized for Core Web Vitals
 
 ## Quick Start
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/rudrodip/mext15.git my-docs
-cd my-docs
+git clone https://github.com/MinhOmega/portfolio.git my-portfolio
+cd my-portfolio
 ```
 
-1. Install dependencies:
+2. Install dependencies:
 
 ```bash
+npm install
+# or
+yarn install
+# or
 bun install
 ```
 
-1. Start the development server:
+3. Start the development server:
 
 ```bash
-bun run dev
+npm run dev
+# or
+yarn dev
+# or
+bun dev
 ```
 
 ## Project Structure
 
 ```bash
 ├── content/          # MDX content files
-│   └── docs/         # Documentation pages
+│   ├── projects/     # Portfolio projects
+│   ├── tils/        # Today I Learned posts
+│   └── blogs/       # Blog posts
 ├── public/           # Static assets
 └── src/
     ├── app/         # Next.js app router pages
@@ -48,39 +60,47 @@ bun run dev
 
 ## Configuration
 
-Site configuration can be customized by editing `src/config/site.config.ts`. This includes:
+Site configuration can be customized by editing `src/config/site.config.ts` and `src/config/portfolio.config.ts`. This includes:
 
+- Personal information
 - Site metadata
 - Social links
+- Portfolio details
 - SEO settings
-- Creator information
 
-## Contributing
+## Features
 
-We welcome contributions! Here's how you can help:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-Please refer to our contribution guidelines for more details.
+- Portfolio showcase with detailed project pages
+- Today I Learned (TIL) section for quick insights
+- Blog section for in-depth technical writing
+- Interactive CV/Resume page
+- Dark/Light theme support
+- Responsive design for all devices
+- SEO optimization
+- Performance-focused implementation
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the GNU AFFERO GENERAL PUBLIC LICENSE Version 3 (AGPL-3.0) - see the LICENSE file for details.
 
-## Support
+This means:
+- You can freely use, modify and distribute this software
+- If you modify and share this software, you must:
+  - Make your modifications available under the same license
+  - Share the source code of your modifications
+  - State your changes
+  - Include the original copyright notice and license
+- If you run a modified version of this software as a web service, you must make the complete source code available to users
 
-- Documentation: Check the `/docs` directory
-- Issues: Submit via GitHub Issues
-- Discussions: Join our GitHub Discussions
+For more details, see the [full license text](https://www.gnu.org/licenses/agpl-3.0.en.html).
 
-## Creator
+## Contact
 
-Created by [rds_agi](https://rdsx.dev)
+- Email: vnqminh0502@gmail.com
+- LinkedIn: [minhvoomega](https://linkedin.com/in/minhvoomega)
+- GitHub: [MinhOmega](https://github.com/minhomega)
 
 ## Links
 
-- [GitHub Repository](https://github.com/rudrodip/mext15)
-- [Demo Site](https://mdx.rdsx.dev)
+- [Portfolio Site](https://minhvo.vercel.app)
+- [GitHub Repository](https://github.com/MinhOmega/portfolio)
