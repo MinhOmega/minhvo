@@ -19,7 +19,7 @@ A modern portfolio and blog built with Next.js 15, MDX, Velite, and Shadcn UI co
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/MinhOmega/portfolio.git my-portfolio
+git clone https://github.com/MinhOmega/minhvo.git my-portfolio
 cd my-portfolio
 ```
 
@@ -103,4 +103,4 @@ For more details, see the [full license text](https://www.gnu.org/licenses/agpl-
 ## Links
 
 - [Portfolio Site](https://minhvo.vercel.app)
-- [GitHub Repository](https://github.com/MinhOmega/portfolio)
+- [GitHub Repository](https://github.com/MinhOmega/minhvo)
